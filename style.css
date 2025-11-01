@@ -100,6 +100,44 @@ h1{
     justify-content: center;
 }
 
+hr{
+    width: 80%;
+    height: 5px;
+    background-color: rgb(67, 53, 26);
+    border-radius: 20px;
+}
+.show-list{
+    background-color: antiquewhite;
+    border-radius: 20px;
+    padding: 10px;
+}
+.todo-item{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.check-box{
+    width: 20px;
+    margin-bottom: 8px;
+    color: #4b1607;
+}
+
+.delete-button{
+    background-color: #A72703;
+    border: none;
+    border-radius: 8px;
+    margin-left: 20px;
+    margin-top: -10px;
+    height: 50px;
+    width: 100px;
+    cursor: pointer; 
+}
+.delete-button:hover{
+    background-color: #4b1607;
+    color: #ad300d;
+}
 
 
 
