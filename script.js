@@ -1,10 +1,17 @@
- document.getElementById("ModifiedTime").textContent = document.lastModified;
+document.getElementById("ModifiedTime").textContent = document.lastModified;
 
 window.onload = function(){
     if (localStorage.getItem("tasklist")){
         document.getElementById("list-todo").innerHTML = localStorage.getItem("tasklist")
     }
 }
+
+const input = document.getElementById("to-do-text");
+input.addEventListener("keydown", function(enter){
+    if (enter.key === "Enter"){
+        addTask();
+    }
+})
 
 function addTask(){
     let taskText = document.getElementById("to-do-text").value;
@@ -16,34 +23,38 @@ function addTask(){
         hr.id = "hrLine";
         li.className = "todo-item";
 
-        li.innerHTML = `<input type="checkbox" class="check-box" id="taskCheck" onclick="checkBoxClicked()"><span id="decorationText">${taskText}</span><button class="delete-button" onclick="deleteTask(this)">Delete</button>`;
+        li.innerHTML = `<input type="checkbox" class="check-box" id="taskCheck" onchange="checkBoxClicked(this)"><span id="decorationText">${taskText}</span><button class="delete-button" onclick="deleteTask(this)">Delete</button>`;
         document.getElementById("list-todo").appendChild(li);
         document.getElementById("list-todo").appendChild(hr);
         localStorage.setItem("tasklist", document.getElementById("list-todo").innerHTML); 
         document.getElementById("to-do-text").value="";
+
 
         
     }else{
         alert("please enter your task")
     }
 }
-function deleteTask(th){
-    th.parentElement.remove();
-    document.getElementById("hrLine").remove();
-
+function deleteTask(button){
+    let deleteTag = button.parentElement;
+    let hrTag = deleteTag.nextElementSibling;
+    console.log(hrTag);
+    hrTag.remove();
+    deleteTag.remove();
     localStorage.setItem("tasklist", document.getElementById("list-todo").innerHTML);
 }
 
 
 
-function checkBoxClicked(){
-    let cBox = document.getElementById("taskCheck")
+function checkBoxClicked(checkbox){
+    let listElement = checkbox.parentElement;
+    let spanText = listElement.querySelector("span");
 
-    if (cBox.checked){
-
-        document.getElementById("decorationText").style.textDecoration = "line-through";
+    if (checkbox.checked){
+        //this.parentElement.style.textDecoration = "line-through";
+        spanText.style.textDecoration = "line-through";
     }else{
-        document.getElementById("decorationText").style.textDecoration = "none";
+        spanText.style.textDecoration = "none";
 
     }
 }
